@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Home from './containers/Home';
+import Renter from './containers/Renter';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h3>Test</h3>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/r/:user" component={Renter} />
+      </Switch>
     );
   }
 }
