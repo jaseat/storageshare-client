@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Renter from '../components/Renter'
 import {connect} from 'react-redux';
+import Renter from '../../components/Renter/Renter'
 
 
 const mapStateToProps = state => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import List, { ListItem } from 'material-ui/List';
 import Button from 'material-ui/Button';
-import { history } from '../store';
+import { history } from '../../store';
 
 class Navbar extends Component {
   render() {
@@ -22,18 +22,16 @@ class Navbar extends Component {
       },
     ];
     return (
-      <div style={styles.sideBar}>
-        <List component="nav">
-          {navigation.map( (e,i) => (
-            <ListItem 
-              key={i}
-              button 
-              onClick={()=>history.push(`/r/${this.props.match.params.user}${e.path}`)}>
-                {e.name}
-              </ListItem>
-          ))}
-        </List>
-      </div>
+      <List component="nav" style={styles.sideBar}>
+        {navigation.map( (e,i) => (
+          <ListItem 
+            key={i}
+            button 
+            onClick={()=>history.push(`/r/${this.props.match.params.user}${e.path}`)}>
+              {e.name}
+            </ListItem>
+        ))}
+      </List>
     )
   }
 }
@@ -42,7 +40,6 @@ const styles = {
   sideBar: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
     height: '600px',
     padding: '0px',
     overflow: 'auto',
