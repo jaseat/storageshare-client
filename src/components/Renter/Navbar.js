@@ -4,6 +4,8 @@ import List, { ListItem } from 'material-ui/List';
 import Button from 'material-ui/Button';
 import { history } from '../../store';
 
+import { Link } from 'react-router-dom';
+
 class Navbar extends Component {
   render() {
     const navigation = [
@@ -24,12 +26,12 @@ class Navbar extends Component {
     return (
       <List component="nav" style={styles.sideBar}>
         {navigation.map( (e,i) => (
-          <ListItem 
+          <Button 
             key={i}
-            button 
-            onClick={()=>history.push(`/r/${this.props.match.params.user}${e.path}`)}>
+            component={Link}
+            to={`/r/${this.props.match.params.user}${e.path}`}>
               {e.name}
-            </ListItem>
+            </Button>
         ))}
       </List>
     )
