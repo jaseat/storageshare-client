@@ -14,7 +14,8 @@
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "superagent": "^3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,5 +23,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "test:CI": "echo 'No tests'"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

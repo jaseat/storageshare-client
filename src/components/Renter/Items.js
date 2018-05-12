@@ -15,23 +15,22 @@ class Items extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchItems();
+    this.props.fetchItems(this.props.userId);
   }
 
   handleChange = (event, value) => {
     this.setState({value});
   }
   render() {
-    console.log(this.props.items);
     var { value } = this.state;
     return (
-      <Paper>
+      <div>
         <Tabs value={value} onChange={this.handleChange}>
           <Tab label="Boxes" />
           <Tab label="Items" />
         </Tabs>
         {(value === 0 && this.props.items) && <Boxes boxes={this.props.items} />}
-      </Paper>
+      </div>
     );
   }
 }

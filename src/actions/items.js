@@ -1,5 +1,6 @@
 // import request from 'superagent';
 import {ItemsTypes as types} from '../action-types';
+import request from 'superagent';
 
 const updateItemsObject = ( items, type ) => {
   return {
@@ -8,26 +9,10 @@ const updateItemsObject = ( items, type ) => {
   };
 };
 
-export function fetchItems() {
-  return dispatch => {
-    const items = [
-      {
-        name: "Test Box",
-        description: "Test box",
-        items: [{name: "test1"}, {name: "test2"}, {name: "test3"}],
-        weight: 10,
-        fragile: 0,
-        status: 'created',
-      },
-      {
-        name: "Test Box 2",
-        description: "Test box",
-        items: [{name: "test1"}, {name: "test2"}, {name: "test3"}, {name: "test3"}, {name: "test3"}, {name: "test3"}],
-        weight: 10,
-        fragile: 0,
-        status: 'created',
-      }
-    ];
+export function fetchItems(id) {
+  return async dispatch => {
+    var items = await fetch('/api/boxes/' + id);
+    items = await items.json();
     dispatch(updateItemsObject(items, types.FETCH_ITEMS));
   };
 }

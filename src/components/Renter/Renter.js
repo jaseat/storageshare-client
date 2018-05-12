@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Navbar, Dash, Items } from '../../containers/Renter'
+import { Navbar, Dash, Items, NewBoxForm } from '../../containers/Renter'
+
+import Paper from 'material-ui/Paper';
 
 class Renter extends Component {
   render() {
     var {match} = this.props;
     return (
       <div style={styles.grid}>
-        <Navbar match={this.props.match}/>
-        <Switch>
-          <Route exact path={`/r/${match.params.user}/`} component={Dash} />
-          <Route exact path={`/r/${match.params.user}/items`} component={Items} />
-        </Switch>
+        <Navbar match={match}/>
+        <Paper>
+          <Switch>
+            <Route exact path={`/r/${match.params.user}/`} component={Dash} />
+            <Route exact path={`/r/${match.params.user}/items`} render={
+              props=> (
+                <Items {...props} userId={match.params.user}/>
+              )
+            } />
+            <Route exact path = {`/r/${match.params.user}/rent`} component={NewBoxForm} />
+          </Switch>
+        </Paper>
       </div>
     )
   }

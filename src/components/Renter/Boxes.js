@@ -20,8 +20,8 @@ class Box extends Component {
     return (
       <Collapse in={this.state.open} style={styles.collapse}>
           <List>
-            {this.props.items.map(i => (
-              <ListItem >
+            {this.props.items.map( (i, idx) => (
+              <ListItem key={idx}>
                 {i.name}
               </ListItem>
             ))}
@@ -34,7 +34,7 @@ class Box extends Component {
   }
 
   render() {
-    var { name } = this.props;
+    var { description } = this.props;
     return (
       <div>
         <Paper style={styles.boxes}>
@@ -44,7 +44,7 @@ class Box extends Component {
               <ChevronRight />}
             </div>
           <div style={{justifySelf: "center", alignSelf: "center"}}>
-            {name}
+            {description}
           </div>
           <Button style={{gridColumnStart: "4"}}>
             Recall
@@ -62,8 +62,8 @@ class Boxes extends Component {
     var { boxes } = this.props;
     return (
       <div>
-        {boxes.map(b => (
-          <Box name={b.name} items={b.items} />
+        {boxes.map( (b, i) => (
+          <Box key={i} description={b.description} items={b.Items} />
         ))}
       </div>
     );
