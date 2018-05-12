@@ -11,58 +11,93 @@ import { FormLabel, FormGroup, FormControl, FormControlLabel } from 'material-ui
 const newRenterUrl = 'users/api/newrenter'
 
 class NewRenterForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            completed: 50,
-            openDialog: false,
-            name: null,
-            email: null,
-            paypal_id: null,
-            phone: null,
-            address: null,
-            isRetnerCreated: false
-        }
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			completed: 50,
+			openDialog: false,
+			nameId: '',
+			emailId: '',
+			paypalId: '',
+			phoneId: '',
+			addressId: '',
+			isRetnerCreated: false,
+		};
+	}
+    //input field watchers
+	_nameChange = (e) => {
+		this.setState({ nameId: e.target.value });
+	};
+	_emailChange = (e) => {
+		this.setState({ emailId: e.target.value });
+	};
+	_paypalChange = (e) => {
+		this.setState({ paypalId: e.target.value });
+	};
+	_phoneChange = (e) => {
+		this.setState({ phoneId: e.target.value });
+	};
+	_addressChange = (e) => {
+		this.setState({ addressId: e.target.value });
+    };
     
-    _nameChange = (e) => {
-        this.setState({ nameId: e.target.value });
-    }
-    _hanldleSubmit = () => {
-        fetch(newRenterUrl, {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                // insert submit new renter data
-            })
-        }).then(resp => {
-            this.setState({ isRenterCreated: true });
-            console.log(resp);
-        }).catch(error => {
-            console.log(error);
-        })
-    }
-    render() {
-        return (
-            <FormControl>
-                <FormGroup>
-                    <FormLabel component="legend">name</FormLabel>
-                    <TextField
-                        id="name"
-                        label="name"
-                        value={this.state.nameId}
-                        onChange={this._nameChange}
-                    />
-                </FormGroup>
-                <br /><br />
-                <FormLabel component="legend">Fragile</FormLabel>
-                <Button variant='raised' color='primary' onClick={this._hanldleSubmit}>Create</Button>
-                {this.state.isRenterCreated ? <NewItem isRenterCreated={this.state.isRenterCreated} /> : null}
-            </FormControl>
-        );
-    }
+	_hanldleSubmit = () => {
+		fetch(newRenterUrl, {
+			method: 'POST',
+			headers: {
+				'content-type': 'application/json',
+			},
+			body: JSON.stringify({
+				// insert submit new renter data
+				name: this.state.nameId,
+				email: this.state.emailId,
+				paypal: this.state.paypalId,
+				phone: this.state.phoneId,
+				address: this.state.addressId,
+			}),
+		})
+			.then((resp) => {
+				this.setState({ isRenterCreated: true });
+				console.log(resp);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+	render() {
+		return (
+			<FormControl>
+				<FormGroup>
+					<TextField id="nameId" label="full name" value={this.state.nameId} onChange={this._nameChange} />
+				</FormGroup>
+				<br />
+				<br />
+				<FormGroup>
+					<TextField id="emailId" label="email" value={this.state.emailId} onChange={this._nameChange} />
+				</FormGroup>
+				<br />
+				<br />
+				<FormGroup>
+					<TextField id="phoneId" label="phone number" value={this.state.phoneId} onChange={this._nameChange} />
+				</FormGroup>
+				<br />
+				<br />
+				<FormGroup>
+					<TextField id="addressId" label="address" value={this.state.addressId} onChange={this._nameChange} />
+				</FormGroup>
+				<br />
+				<br />
+				<FormGroup>
+					<TextField id="paypalId" label="paypal email" value={this.state.paypaylId} onChange={this._nameChange} />
+				</FormGroup>
+				<br />
+				<br />
+				<Button variant="raised" color="primary" onClick={this._hanldleSubmit}>
+					Submit
+				</Button>
+			</FormControl>
+		);
+	}
 }
 NewRenterForm.propTypes = {
     userId: PropTypes.number.isRequired
