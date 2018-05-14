@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
 import LoginForm from './LoginForm';
 import PropTypes from 'prop-types';
 import { history } from '../../store';

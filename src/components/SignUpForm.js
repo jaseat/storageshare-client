@@ -6,6 +6,7 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import MaskedInput from 'react-text-mask';
 import { FormControl } from 'material-ui/Form';
+import Input, { InputLabel } from 'material-ui/Input';
 //--custom
 const newRenterUrl = '/newrenter'
 
@@ -37,7 +38,7 @@ class SignUpForm extends Component {
       email: '',
       password: '',
       paypal: '',
-      phone: '',
+      phone: '(   )    -    ',
       address: '',
       isRetnerCreated: false,
     };
@@ -50,12 +51,7 @@ class SignUpForm extends Component {
   }
   _phoneChange = (e) => {
     //tests for number before changing form data
-    const re = /^[0-9\b]+$/;
-    const numOfDigits = e.target.value.length;
-    const phoneCharsMax = 10;
-    if (e.target.value === '' || (re.test(e.target.value) && numOfDigits < phoneCharsMax)) {
-      this.setState({ phone: e.target.value});
-    }
+    this.setState({ phone: e.target.value});
   };
 
   _hanldleSubmit = () => {
@@ -75,9 +71,9 @@ class SignUpForm extends Component {
       	address: this.state.address,
       }),
     })
-      .then((resp) => {
-      	this.setState({ isRenterCreated: true });
-      	console.log(resp);
+      .then(res => res.json())
+      .then((res) => {
+        this.props.login(res.newUserId);
       })
       .catch((error) => {
       	console.log(error);
@@ -107,25 +103,27 @@ class SignUpForm extends Component {
           value={this.state.password} 
           onChange={this._handleChange("password")} 
         />
-        <TextField 
+        <FormControl>
+        <InputLabel>Phone Number</InputLabel>
+        <Input 
           required={true} 
           id="phoneId" 
-          label="phone number" 
           value={this.state.phone} 
           onChange={this._phoneChange} 
-          inputComponent={TextMaskCustom} 
+          inputComponent={TextMaskCustom}
         />
+        </FormControl>
         <TextField 
           required={true} 
           id="address" 
           label="address" 
-          value={this.state.addressId} 
+          value={this.state.address} 
           onChange={this._handleChange("address")} 
         />
         <TextField 
           id="paypal" 
           label="paypal email" 
-          value={this.state.paypaylId} 
+          value={this.state.paypayl} 
           onChange={this._handleChange("paypal")} 
         />
         <Button 
@@ -141,7 +139,7 @@ class SignUpForm extends Component {
 }
 
 SignUpForm.propTypes = {
-  userId: PropTypes.number.isRequired,
+  login: PropTypes.func,
 }
 
 export default SignUpForm;
