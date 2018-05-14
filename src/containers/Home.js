@@ -9,6 +9,9 @@ class Home extends Component {
         <Link to="/r/1" >
           User Page
         </Link>
+        <Link to="/signup" >
+          Sign Up
+        </Link>
       </div>
     )
   }

@@ -1,6 +1,4 @@
-// import request from 'superagent';
 import {ItemsTypes as types} from '../action-types';
-import request from 'superagent';
 
 const updateItemsObject = ( items, type ) => {
   return {
