@@ -1,6 +1,10 @@
 import ItemsTypes from './items';
+import UserTypes from './user';
 
-export { ItemsTypes };
+export { 
+  ItemsTypes,
+  UserTypes,
+};
 
 export default {
   ItemsTypes
