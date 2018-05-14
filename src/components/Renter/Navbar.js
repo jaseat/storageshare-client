@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import List, { ListItem } from 'material-ui/List';
 import Button from 'material-ui/Button';
 import { history } from '../../store';
+import Typography from 'material-ui/Typography'
 
 import { Link } from 'react-router-dom';
 
@@ -24,29 +25,21 @@ class Navbar extends Component {
       },
     ];
     return (
-      <List component="nav" style={styles.sideBar}>
+      <List component="nav">
         {navigation.map( (e,i) => (
-          <Button 
+          <ListItem
+          button
             key={i}
             component={Link}
             to={`/r/${this.props.match.params.user}${e.path}`}>
+            <Typography variant = 'title' align='center'>
               {e.name}
-            </Button>
+              </Typography>
+            </ListItem>
         ))}
       </List>
     )
   }
-}
-
-const styles = {
-  sideBar: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '600px',
-    padding: '0px',
-    overflow: 'auto',
-    width: '240px',
-  },
 }
 
 export default Navbar;
