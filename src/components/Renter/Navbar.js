@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import List from 'material-ui/List';
+import List, { ListItem } from 'material-ui/List';
 import Button from 'material-ui/Button';
 import { history } from '../../store';
 import Typography from 'material-ui/Typography'
@@ -12,7 +12,7 @@ class Navbar extends Component {
       {
         name: 'Dash',
         path: '/',
-      },{
+      }, {
         name: 'Rent',
         path: '/rent',
       }, {
@@ -25,16 +25,16 @@ class Navbar extends Component {
     ];
     return (
       <List component="nav">
-        {navigation.map( (e,i) => (
+        {navigation.map((e, i) => (
           <ListItem
-          button
+            button
             key={i}
             component={Link}
             to={`/r/${this.props.match.params.user}${e.path}`}>
-            <Typography variant = 'title' align='center'>
+            <Typography variant='title' align='center'>
               {e.name}
-              </Typography>
-            </ListItem>
+            </Typography>
+          </ListItem>
         ))}
       </List>
     )
