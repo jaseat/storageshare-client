@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import Navbar from '../../components/Renter/Navbar'
 import {connect} from 'react-redux';
 

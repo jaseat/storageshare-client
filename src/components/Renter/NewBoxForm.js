@@ -63,7 +63,7 @@ class NewBoxForm extends Component {
         renterId: 1,
         sizeId: this.state.choosenSizeId,
         weight: this.state.weight,
-        fragile: this.state.fragile == 'true' ? true : false
+        fragile: this.state.fragile === 'true' ? true : false
       })
     }).then(resp => {
       this.setState({isBoxCreated: true});

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
-import List, { ListItem } from 'material-ui/List';
+import List from 'material-ui/List';
 import Button from 'material-ui/Button';
-import { history } from '../../store';
 
 import { Link } from 'react-router-dom';
 
