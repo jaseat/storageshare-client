@@ -62,7 +62,7 @@ class NewBoxForm extends Component {
         renterId: 1,
         sizeId: this.state.choosenSizeId,
         weight: this.state.weight,
-        fragile: this.state.fragile == 'true' ? true : false
+        fragile: this.state.fragile === 'true' ? true : false
       })
     }).then(resp => {
       this.setState({isBoxCreated: true});
@@ -77,6 +77,7 @@ class NewBoxForm extends Component {
           <FormLabel component="legend">Size</FormLabel>
           <TextField
             select
+            margin = 'normal'
             value={this.state.choosenSizeId}
             onChange={this._sizeChange}
             InputProps={{
@@ -89,8 +90,8 @@ class NewBoxForm extends Component {
         <FormGroup>
           <FormLabel component="legend">Weight</FormLabel>
           <TextField
+          margin = 'normal'
             required={true}
-            defaultValue={20}
             InputProps={{
               startAdornment: <InputAdornment position="start">Lb.</InputAdornment>
             }}
@@ -100,6 +101,7 @@ class NewBoxForm extends Component {
         <br /><br />
         <FormLabel component="legend">Fragile</FormLabel>
         <RadioGroup
+        margin = 'normal'
           name="fragile"
           row
           value={this.state.fragile}
