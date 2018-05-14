@@ -10,13 +10,12 @@ import Radio, { RadioGroup } from 'material-ui/Radio';
 import { FormLabel, FormGroup, FormControl, FormControlLabel } from 'material-ui/Form';
 //--custom
 import NewItem from './NewItem'
-const sizesUrl = '/users/api/sizes';
-const newBoxUrl = '/users/api/box';
+const sizesUrl = '/api/sizes';
+const newBoxUrl = '/api/box';
 class NewBoxForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      completed: 50,
       openDialog: false,
       sizes: [],
       items: [],
@@ -67,7 +66,6 @@ class NewBoxForm extends Component {
       })
     }).then(resp => {
       this.setState({isBoxCreated: true});
-      console.log(resp);
     }).catch(error => {
       console.log(error);
     })
@@ -79,6 +77,7 @@ class NewBoxForm extends Component {
           <FormLabel component="legend">Size</FormLabel>
           <TextField
             select
+            margin = 'normal'
             value={this.state.choosenSizeId}
             onChange={this._sizeChange}
             InputProps={{
@@ -91,8 +90,8 @@ class NewBoxForm extends Component {
         <FormGroup>
           <FormLabel component="legend">Weight</FormLabel>
           <TextField
+          margin = 'normal'
             required={true}
-            defaultValue={20}
             InputProps={{
               startAdornment: <InputAdornment position="start">Lb.</InputAdornment>
             }}
@@ -102,6 +101,7 @@ class NewBoxForm extends Component {
         <br /><br />
         <FormLabel component="legend">Fragile</FormLabel>
         <RadioGroup
+        margin = 'normal'
           name="fragile"
           row
           value={this.state.fragile}
@@ -110,7 +110,7 @@ class NewBoxForm extends Component {
           <FormControlLabel value='false' control={<Radio color="primary" />} label="No" />
         </RadioGroup>
         <Button variant='raised' color='primary' onClick={this._hanldleSubmit}>Create</Button>
-        {this.state.isBoxCreated?<NewItem isBoxCreated={this.state.isBoxCreated}/>:null}
+        {this.state.isBoxCreated?<NewItem/>:null}
       </FormControl>
     );
   }

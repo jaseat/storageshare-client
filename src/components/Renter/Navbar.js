@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import List from 'material-ui/List';
-import Button from 'material-ui/Button';
+import List, { ListItem } from 'material-ui/List';
+import { history } from '../../store';
+import Typography from 'material-ui/Typography'
 
 import { Link } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ class Navbar extends Component {
       {
         name: 'Dash',
         path: '/',
-      },{
+      }, {
         name: 'Rent',
         path: '/rent',
       }, {
@@ -22,29 +23,21 @@ class Navbar extends Component {
       },
     ];
     return (
-      <List component="nav" style={styles.sideBar}>
-        {navigation.map( (e,i) => (
-          <Button 
+      <List component="nav">
+        {navigation.map((e, i) => (
+          <ListItem
+            button
             key={i}
             component={Link}
             to={`/r/${this.props.match.params.user}${e.path}`}>
+            <Typography variant='title' align='center'>
               {e.name}
-            </Button>
+            </Typography>
+          </ListItem>
         ))}
       </List>
     )
   }
-}
-
-const styles = {
-  sideBar: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '600px',
-    padding: '0px',
-    overflow: 'auto',
-    width: '240px',
-  },
 }
 
 export default Navbar;
