@@ -9,7 +9,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import MaskedInput from 'react-text-mask';
 import { FormLabel, FormGroup, FormControl, FormControlLabel } from 'material-ui/Form';
 //--custom
-const newRenterUrl = 'users/api/newrenter'
+const newRenterUrl = '/index/newrenter'
 
 function TextMaskCustom(props) {
     const { inputRef, ...other } = props;
@@ -39,9 +39,9 @@ class NewRenterForm extends Component {
 			nameId: '',
 			emailId: '',
 			paypalId: '',
-			phoneId: '(1  )   -    ',
+            phoneId: '',
             addressId: '',
-			isRetnerCreated: false,
+            isRetnerCreated: false,
 		};
 	}
     //input field watchers
@@ -55,7 +55,13 @@ class NewRenterForm extends Component {
 		this.setState({ paypalId: e.target.value });
 	};
 	_phoneChange = (e) => {
-		this.setState({ phoneId: e.target.value });
+        //tests for number before changing form data
+        const re = /^[0-9\b]+$/;
+        const numOfDigits = e.target.value.length;
+        const phoneCharsMax = 10;
+        if (e.target.value == '' || re.test(e.target.value) && numOfDigits < phoneCharsMax) {
+        this.setState({ phoneId: e.target.value});
+        }
 	};
 	_addressChange = (e) => {
 		this.setState({ addressId: e.target.value });
