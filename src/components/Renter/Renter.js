@@ -8,12 +8,12 @@ class Renter extends Component {
   render() {
     var { match } = this.props;
     return (
-        <Grid container>
-          <Grid item xs={2}>
-            <Navbar match={match} />
-          </Grid>
-          <Grid item xs={10}>
-          <Grid container direction = 'row' justify = 'center' alignItems='center'>
+      <Grid container>
+        <Grid item xs={2}>
+          <Navbar match={match} />
+        </Grid>
+        <Grid item xs={8}>
+          <Grid container direction='row' justify='center' alignItems='center'>
             <Switch>
               <Route exact path={`/r/${match.params.user}/`} component={Dash} />
               <Route exact path={`/r/${match.params.user}/items`} render={
@@ -23,21 +23,10 @@ class Renter extends Component {
               } />
               <Route exact path={`/r/${match.params.user}/rent`} component={NewBoxForm} />
             </Switch>
-            </Grid>
           </Grid>
         </Grid>
-
+      </Grid>
     )
-  }
-}
-
-const styles = {
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "0.5fr 4fr",
-    width: "960px",
-    height: "500px",
-    margin: "auto",
   }
 }
 

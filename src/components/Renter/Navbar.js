@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import List, { ListItem } from 'material-ui/List';
-import Button from 'material-ui/Button';
 import { history } from '../../store';
 import Typography from 'material-ui/Typography'
 

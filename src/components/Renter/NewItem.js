@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Chip from 'material-ui/Chip'; //-- convinient to display added items
 import TextField from 'material-ui/TextField';
 import { InputAdornment } from 'material-ui/Input';
-import { FormGroup } from 'material-ui/Form';
+import { FormGroup} from 'material-ui/Form';
 import { Button } from 'material-ui';
 import AddIcon from '@material-ui/icons/Add';
 class NewItems extends Component{
