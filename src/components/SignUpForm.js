@@ -70,7 +70,8 @@ class SignUpForm extends Component {
     }
   };
 
-  _hanldleSubmit = () => {
+  _hanldleSubmit = (e) => {
+    e.preventDefault();
     if (this.state.password === this.state.passwordConfirm) {
       fetch(newRenterUrl, {
         method: 'POST',
@@ -91,6 +92,7 @@ class SignUpForm extends Component {
         .then(res => res.json())
         .then((res) => {
           this.props.login(res.newUserId);
+          this.props.handleCloseDialog;
         })
         .catch((error) => {
           console.log(error);
@@ -174,7 +176,7 @@ class SignUpForm extends Component {
             <Grid item xs={1}>
               <Home />
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={11}>
               <TextField
                 fullWidth
                 required={true}
@@ -205,6 +207,7 @@ class SignUpForm extends Component {
             </Grid>
             <Grid item xs={5}>
               <TextField
+              fullWidth
                 id="paypal"
                 label="Paypal email"
                 value={this.state.paypaylId}

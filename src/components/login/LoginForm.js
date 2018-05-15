@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import SignUpForm from '../../containers/SignUpForm'
 import Paper from 'material-ui/Paper'
+import Typography from 'material-ui/Typography'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -52,7 +53,10 @@ class LoginForm extends Component {
   render() {
     return (
       <form style={{ maxWidth: 250 }}>
-        {this.state.fail && <h1>Email or Password is incorrect</h1>}
+        {this.state.fail &&
+          <Typography variant='subheading' color='error'>
+            Email or Password is incorrect
+        </Typography>}
         <TextField
           fullWidth
           margin='normal'
