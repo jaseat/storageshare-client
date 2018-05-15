@@ -2,19 +2,23 @@ import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import PropTypes from 'prop-types';
 import { history } from '../../store';
+import Paper from 'material-ui/Paper'
+import Typography from 'material-ui/Typography'
 
 class Layout extends Component {
   componentWillMount() {
-    if(this.props.currentUser) {
+    if (this.props.currentUser) {
       history.push('/r/' + this.props.currentUser);
     }
   }
   render() {
     return (
-      <div>
-        <h1>Login</h1>
+      <Paper style={{padding: 16}}>
+        <Typography variant='title'>
+          Log In
+        </Typography>
         <LoginForm login={this.props.login} currentUser={this.props.currentUser} />
-      </div>
+      </Paper>
     );
   }
 }

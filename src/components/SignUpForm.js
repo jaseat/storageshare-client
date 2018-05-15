@@ -5,8 +5,17 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import MaskedInput from 'react-text-mask';
-import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import Divider from 'material-ui/Divider';
+import { Typography } from 'material-ui';
+import { AccountBox, Email, Lock, Home, Phone, AccountBalanceWallet } from '@material-ui/icons';
+import Grid from 'material-ui/Grid'
+
 //--custom
 const newRenterUrl = '/newrenter'
 
@@ -37,6 +46,7 @@ class SignUpForm extends Component {
       name: '',
       email: '',
       password: '',
+      passwordConfirm: '',
       paypal: '',
       phone: '(   )    -    ',
       address: '',
@@ -51,87 +61,169 @@ class SignUpForm extends Component {
   }
   _phoneChange = (e) => {
     //tests for number before changing form data
-    this.setState({ phone: e.target.value});
+    this.setState({ phone: e.target.value });
   };
 
   _hanldleSubmit = () => {
-    fetch(newRenterUrl, {
-      method: 'POST',
-      headers: {
-      	'content-type': 'application/json',
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify({
-      	// insert submit new renter data
-      	name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-      	paypal: this.state.paypal,
-      	phone: this.state.phone,
-      	address: this.state.address,
-      }),
-    })
-      .then(res => res.json())
-      .then((res) => {
-        this.props.login(res.newUserId);
+    if (this.state.password === this.state.passwordConfirm) {
+      fetch(newRenterUrl, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          // insert submit new renter data
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password,
+          paypal: this.state.paypal,
+          phone: this.state.phone,
+          address: this.state.address,
+        }),
       })
-      .catch((error) => {
-      	console.log(error);
-      });
+        .then(res => res.json())
+        .then((res) => {
+          this.props.login(res.newUserId);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      //show error
+    }
   };
   render() {
     return (
-      <FormControl>
-        <TextField
-          required={true}
-          id="nameId"
-          label="full name"
-          value={this.state.name}
-          onChange={this._handleChange("name")}
-        />
-        <TextField
-          required={true}
-          id="emailId"
-          label="email"
-          value={this.state.email}
-          onChange={this._handleChange("email")}
-        />
-        <TextField
-          required={true}
-          id="passwordId"
-          label="password"
-          value={this.state.password}
-          onChange={this._handleChange("password")}
-        />
-        <TextField
-          required={true}
-          id="phoneId"
-          label="phone number"
-          value={this.state.phone}
-          onChange={this._phoneChange}
-          inputComponent={TextMaskCustom}
-        />
-        <TextField
-          required={true}
-          id="address"
-          label="address"
-          value={this.state.addressId}
-          onChange={this._handleChange("address")}
-        />
-        <TextField
-          id="paypal"
-          label="paypal email"
-          value={this.state.paypaylId}
-          onChange={this._handleChange("paypal")}
-        />
-        <Button
-          variant="raised"
-          color="primary"
-          onClick={this._hanldleSubmit}
-        >
-          Submit
+      <Dialog
+        open={this.props.open}
+        onClose={this.props.handleCloseDialog}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-signup-title">SignUp</DialogTitle>
+        <DialogContent>
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item xs={1}>
+              <AccountBox />
+            </Grid>
+            <Grid item xs={11}>
+              <TextField
+                fullWidth
+                required={true}
+                id="nameId"
+                label="Full name"
+                value={this.state.name}
+                onChange={this._handleChange("name")}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item xs={1}>
+              <Email />
+            </Grid>
+            <Grid item xs={11}>
+              <TextField
+                fullWidth
+                required={true}
+                id="emailId"
+                label="Email"
+                value={this.state.email}
+                onChange={this._handleChange("email")}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item xs={1}>
+              <Lock />
+            </Grid>
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                required={true}
+                id="passwordId"
+                label="Password"
+                type='password'
+                value={this.state.password}
+                onChange={this._handleChange("password")}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                required={true}
+                id="passwordConfirm"
+                label="Confirm password"
+                type='password'
+                value={this.state.passwordConfirm}
+                onChange={this._handleChange("passwordConfirm")}
+              />
+            </Grid>
+          </Grid>
+          <br />
+          <Typography variant='subheading' color='primary'>
+            Personal Info
+          </Typography>
+          <br />
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item xs={1}>
+              <Home />
+            </Grid>
+            <Grid item xs={10}>
+              <TextField
+                fullWidth
+                required={true}
+                id="address"
+                label="Address"
+                value={this.state.addressId}
+                onChange={this._handleChange("address")}
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={8} alignItems="flex-end">
+            <Grid item xs={1}>
+              <Phone />
+            </Grid>
+            <Grid item xs={5}>
+              <TextField
+                fullWidth
+                required={true}
+                id="phoneId"
+                label="Phone number"
+                value={this.state.phone}
+                onChange={this._phoneChange}
+                inputComponent={TextMaskCustom}
+              />
+            </Grid>
+            <Grid item xs={1}>
+              <AccountBalanceWallet />
+            </Grid>
+            <Grid item xs={5}>
+              <TextField
+                id="paypal"
+                label="Paypal email"
+                value={this.state.paypaylId}
+                onChange={this._handleChange("paypal")}
+              />
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            variant='raised'
+            color='secondary'
+            onClick={this.props.handleCloseDialog}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="raised"
+            color="primary"
+            onClick={this._hanldleSubmit}
+          >
+            Submit
         </Button>
-      </FormControl>
+        </DialogActions>
+      </Dialog>
     );
   }
 }

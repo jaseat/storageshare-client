@@ -26,7 +26,7 @@ const StorageShare = createMuiTheme({
     },
     MuiDialog: {
       paper: {
-        backgroundColor: '#3d3d3d',
+        backgroundColor: '#fff',
       }
     },
   },
