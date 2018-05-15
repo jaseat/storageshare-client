@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './containers/Home';
 import Renter from './containers/Renter';
 import SignUp from './containers/SignUpForm';
+import Login from './containers/login/Login';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { StorageShareDark } from './components/Theme/PortfolioTheme'
 import CssBaseline from 'material-ui/CssBaseline';
@@ -27,6 +28,7 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/r/:user" component={Renter} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/login" component={Login} />
       </Switch>
       </MuiThemeProvider>
     );

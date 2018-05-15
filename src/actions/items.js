@@ -9,7 +9,9 @@ const updateItemsObject = ( items, type ) => {
 
 export function fetchItems(id) {
   return async dispatch => {
-    var items = await fetch('/api/boxes/' + id);
+    var items = await fetch('/api/box/' + id, {
+      credentials: 'same-origin',
+    });
     items = await items.json();
     dispatch(updateItemsObject(items, types.FETCH_ITEMS));
   };

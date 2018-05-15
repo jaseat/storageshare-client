@@ -58,17 +58,21 @@ class NewBoxForm extends Component {
       headers: {
         'content-type': 'application/json'
       },
+      credentials: 'same-origin',
       body: JSON.stringify({
-        renterId: 1,
         sizeId: this.state.choosenSizeId,
         weight: this.state.weight,
         fragile: this.state.fragile === 'true' ? true : false
       })
-    }).then(resp => {
-      this.setState({isBoxCreated: true});
-    }).catch(error => {
-      console.log(error);
     })
+      .then(resp => resp.json())
+      .then(resp => {
+        this.setState({isBoxCreated: true});
+        console.log(resp);
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
   render() {
     return (
