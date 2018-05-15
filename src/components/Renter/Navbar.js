@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import List, { ListItem } from 'material-ui/List';
-import { history } from '../../store';
 import Typography from 'material-ui/Typography'
 
 import { Link } from 'react-router-dom';

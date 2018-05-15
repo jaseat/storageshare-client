@@ -77,7 +77,7 @@ Boxes.propTypes = {
 var styles = {
   boxes: {
     display: "grid",
-    width: "80%",
+    width: "90%",
     margin: "auto",
     marginTop: "5%",
     gridTemplateColumns: "[first] 5% 25% auto 15% [end]",

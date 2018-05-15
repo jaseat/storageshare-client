@@ -22,7 +22,7 @@ class Items extends Component {
   render() {
     var { value } = this.state;
     return (
-      <div>
+      <div style={{width: "100%"}}>
         <Tabs value={value} onChange={this.handleChange}>
           <Tab label="Boxes" />
           <Tab label="Items" />
