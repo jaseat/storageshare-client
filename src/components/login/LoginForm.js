@@ -56,7 +56,7 @@ class LoginForm extends Component {
         value={this.state.password}
         onChange={this.handleChange('password')}
         />
-        <Button 
+        <Button
           onClick={this.handleSubmit}
           disabled={!this.state.email || !this.state.password}
         >
