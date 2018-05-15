@@ -61,6 +61,7 @@ class NewBoxForm extends Component {
       credentials: 'same-origin',
       body: JSON.stringify({
         sizeId: this.state.choosenSizeId,
+        userId: this.props.userId,
         weight: this.state.weight,
         fragile: this.state.fragile === 'true' ? true : false
       })
@@ -119,6 +120,6 @@ class NewBoxForm extends Component {
   }
 }
 NewBoxForm.propTypes = {
-  userId: PropTypes.number.isRequired
+  userId: PropTypes.isRequired
 }
 export default NewBoxForm;

@@ -41,9 +41,9 @@ class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      completed: 50,
       openDialog: false,
       name: '',
+      lastName: '',
       email: '',
       password: '',
       passwordConfirm: '',
@@ -61,16 +61,17 @@ class SignUpForm extends Component {
   }
 
   _phoneChange = (e) => {
-  //tests for number before changing form data
+    //tests for number before changing form data
     const re = /^[0-9\b]+$/;
     const numOfDigits = e.target.value.length;
     const phoneCharsMax = 11;
     if (e.target.value === '' || (re.test(e.target.value) && numOfDigits < phoneCharsMax)) {
-      this.setState({ phone: e.target.value});
+      this.setState({ phone: e.target.value });
     }
   };
 
-  _hanldleSubmit = () => {
+  _hanldleSubmit = (e) => {
+    e.preventDefault();
     if (this.state.password === this.state.passwordConfirm) {
       fetch(newRenterUrl, {
         method: 'POST',
@@ -80,7 +81,7 @@ class SignUpForm extends Component {
         credentials: 'same-origin',
         body: JSON.stringify({
           // insert submit new renter data
-          name: this.state.name,
+          name: this.state.firstName + ' ' + this.state.lastName,
           email: this.state.email,
           password: this.state.password,
           paypal: this.state.paypal,
@@ -91,6 +92,7 @@ class SignUpForm extends Component {
         .then(res => res.json())
         .then((res) => {
           this.props.login(res.newUserId);
+          this.props.handleCloseDialog;
         })
         .catch((error) => {
           console.log(error);
@@ -112,14 +114,24 @@ class SignUpForm extends Component {
             <Grid item xs={1}>
               <AccountBox />
             </Grid>
-            <Grid item xs={11}>
+            <Grid item xs={5}>
               <TextField
                 fullWidth
                 required={true}
                 id="nameId"
-                label="Full name"
-                value={this.state.name}
-                onChange={this._handleChange("name")}
+                label="First Name"
+                value={this.state.firstName}
+                onChange={this._handleChange("firstName")}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                required={true}
+                id="nameId"
+                label="Last name"
+                value={this.state.lastName}
+                onChange={this._handleChange("lastName")}
               />
             </Grid>
           </Grid>
@@ -174,7 +186,7 @@ class SignUpForm extends Component {
             <Grid item xs={1}>
               <Home />
             </Grid>
-            <Grid item xs={10}>
+            <Grid item xs={11}>
               <TextField
                 fullWidth
                 required={true}
@@ -205,6 +217,7 @@ class SignUpForm extends Component {
             </Grid>
             <Grid item xs={5}>
               <TextField
+                fullWidth
                 id="paypal"
                 label="Paypal email"
                 value={this.state.paypaylId}

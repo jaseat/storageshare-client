@@ -3,7 +3,7 @@ import NewBoxForm from '../../components/Renter/NewBoxForm'
 
 const mapStateToProps = (state) => {
   return {
-    // userId: state.user.userId
+    userId: state.user.userId
   };
 }
 
