@@ -28,11 +28,6 @@ class App extends Component {
           <div id = 'log-in container' style = {{position: 'absolute', right: 0}}>
           <Button component={Link} to = '/r/1'>Admin</Button>
           </div>
-          {/* :
-          <div id = 'menu' style = {{position: 'absolute', right: 0}}>
-          LoggedIn
-          </div>
-          } */}
         </Toolbar>
       </AppBar>
       <Switch>
