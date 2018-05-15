@@ -4,8 +4,8 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import { typography } from 'material-ui/styles';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import LoginForm from '../components/login/LoginForm'
-import SignUpForm from './SignUpForm'
+import LoginForm from './login/Login'
+
 
 const img = require('../components/Theme/img/Sacramento_Skyline.jpg');
 
@@ -30,16 +30,9 @@ class Home extends Component {
           </Typography>
           </Grid>
           <Grid item xs={6}>
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleTabChange}
-              textColor='secondary'
-              fullWidth>
-              <Tab label='LogIn' />
-              <Tab label='SignUp' />
-            </Tabs>
-            {this.state.value === 0 && <LoginForm/>}
-            {this.state.value === 1 && <SignUpForm/>}
+          <Grid container direction='row' justify='flex-end' alignItems='flex-start'>
+            <LoginForm/>
+          </Grid>
           </Grid>
         </Grid>
       </div>
