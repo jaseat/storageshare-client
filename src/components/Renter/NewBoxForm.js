@@ -81,7 +81,7 @@ class NewBoxForm extends Component {
           <FormLabel component="legend">Size</FormLabel>
           <TextField
             select
-            margin = 'normal'
+            margin='normal'
             value={this.state.choosenSizeId}
             onChange={this._sizeChange}
             InputProps={{
@@ -94,7 +94,7 @@ class NewBoxForm extends Component {
         <FormGroup>
           <FormLabel component="legend">Weight</FormLabel>
           <TextField
-          margin = 'normal'
+            margin='normal'
             required={true}
             InputProps={{
               startAdornment: <InputAdornment position="start">Lb.</InputAdornment>
@@ -105,7 +105,6 @@ class NewBoxForm extends Component {
         <br /><br />
         <FormLabel component="legend">Fragile</FormLabel>
         <RadioGroup
-        margin = 'normal'
           name="fragile"
           row
           value={this.state.fragile}
@@ -114,7 +113,7 @@ class NewBoxForm extends Component {
           <FormControlLabel value='false' control={<Radio color="primary" />} label="No" />
         </RadioGroup>
         <Button variant='raised' color='primary' onClick={this._hanldleSubmit}>Create</Button>
-        {this.state.isBoxCreated?<NewItem/>:null}
+        {this.state.isBoxCreated ? <NewItem /> : null}
       </FormControl>
     );
   }

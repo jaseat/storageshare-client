@@ -82,53 +82,51 @@ class SignUpForm extends Component {
   render() {
     return (
       <FormControl>
-        <TextField 
-          required={true} 
-          id="nameId" 
-          label="full name" 
-          value={this.state.name} 
-          onChange={this._handleChange("name")} 
+        <TextField
+          required={true}
+          id="nameId"
+          label="full name"
+          value={this.state.name}
+          onChange={this._handleChange("name")}
         />
-        <TextField 
-          required={true} 
-          id="emailId" 
-          label="email" 
-          value={this.state.email} 
-          onChange={this._handleChange("email")} 
+        <TextField
+          required={true}
+          id="emailId"
+          label="email"
+          value={this.state.email}
+          onChange={this._handleChange("email")}
         />
-        <TextField 
-          required={true} 
-          id="passwordId" 
-          label="password" 
-          value={this.state.password} 
-          onChange={this._handleChange("password")} 
+        <TextField
+          required={true}
+          id="passwordId"
+          label="password"
+          value={this.state.password}
+          onChange={this._handleChange("password")}
         />
-        <FormControl>
-        <InputLabel>Phone Number</InputLabel>
-        <Input 
-          required={true} 
-          id="phoneId" 
-          value={this.state.phone} 
-          onChange={this._phoneChange} 
+        <TextField
+          required={true}
+          id="phoneId"
+          label="phone number"
+          value={this.state.phone}
+          onChange={this._phoneChange}
           inputComponent={TextMaskCustom}
         />
-        </FormControl>
-        <TextField 
-          required={true} 
-          id="address" 
-          label="address" 
-          value={this.state.address} 
-          onChange={this._handleChange("address")} 
+        <TextField
+          required={true}
+          id="address"
+          label="address"
+          value={this.state.addressId}
+          onChange={this._handleChange("address")}
         />
-        <TextField 
-          id="paypal" 
-          label="paypal email" 
-          value={this.state.paypayl} 
-          onChange={this._handleChange("paypal")} 
+        <TextField
+          id="paypal"
+          label="paypal email"
+          value={this.state.paypaylId}
+          onChange={this._handleChange("paypal")}
         />
-        <Button 
-          variant="raised" 
-          color="primary" 
+        <Button
+          variant="raised"
+          color="primary"
           onClick={this._hanldleSubmit}
         >
           Submit

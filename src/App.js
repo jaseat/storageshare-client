@@ -1,27 +1,33 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Home from './containers/Home';
 import Renter from './containers/Renter';
 import SignUp from './containers/SignUpForm';
 import Login from './containers/login/Login';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { StorageShareDark } from './components/Theme/PortfolioTheme'
+import StorageShare from './components/Theme/StorageShareTheme'
 import CssBaseline from 'material-ui/CssBaseline';
 import Typography from 'material-ui/Typography'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
+import Button from 'material-ui/Button'
 
+const signupLink = <Route path="/signup" component={SignUp} />
 
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider theme={StorageShareDark}>
+      <MuiThemeProvider theme={StorageShare}>
         <CssBaseline />
         <AppBar position="sticky" color="primary">
         <Toolbar>
-          <Typography variant="display1" color="inherit">
-            StorageShare.com
+          <Typography variant="button" color="inherit">
+            StorageQ
           </Typography>
+          <div id = 'log-in container' style = {{position: 'absolute', right: 0}}>
+          <Button component={Link} to = '/r/1'>Admin</Button>
+          </div>
         </Toolbar>
       </AppBar>
       <Switch>

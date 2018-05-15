@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import { FormLabel, FormGroup, FormControl, FormControlLabel } from 'material-ui/Form';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -42,27 +43,33 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <FormControl>
+      <FormGroup>
         {this.state.fail && <h1>Email or Password is incorrect</h1>}
         <TextField
+        margin='normal'
         id="email"
         label="Email"
         value={this.state.email}
         onChange={this.handleChange('email')}
-        /> <br />
+        />
         <TextField
+        margin='normal'
         id="password"
         label="Password"
         value={this.state.password}
         onChange={this.handleChange('password')}
         />
-        <Button 
+        </FormGroup>
+        <Button
+          variant = 'raised'
+          color = 'primary'
           onClick={this.handleSubmit}
           disabled={!this.state.email || !this.state.password}
         >
           Login
         </Button>
-      </form>
+      </FormControl>
     );
   }
 }
