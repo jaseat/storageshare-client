@@ -59,7 +59,6 @@ class LoginForm extends Component {
         </Typography>}
         <TextField
           fullWidth
-          margin='normal'
           id="email"
           label="Email"
           value={this.state.email}
