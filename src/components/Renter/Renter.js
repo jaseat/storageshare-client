@@ -9,10 +9,10 @@ class Renter extends Component {
     var { match } = this.props;
     return (
       <Grid container>
-        <Grid item xs={2}>
+        <Grid item xs={12} sm={2}>
           <Navbar match={match} />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} sm={10}>
           <Grid container direction='row' justify='center' alignItems='center'>
             <Switch>
               <Route exact path={`/r/${match.params.user}/`} component={Dash} />
