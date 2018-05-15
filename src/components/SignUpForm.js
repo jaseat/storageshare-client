@@ -61,12 +61,12 @@ class SignUpForm extends Component {
   }
 
   _phoneChange = (e) => {
-  //tests for number before changing form data
+    //tests for number before changing form data
     const re = /^[0-9\b]+$/;
     const numOfDigits = e.target.value.length;
     const phoneCharsMax = 11;
     if (e.target.value === '' || (re.test(e.target.value) && numOfDigits < phoneCharsMax)) {
-      this.setState({ phone: e.target.value});
+      this.setState({ phone: e.target.value });
     }
   };
 
@@ -81,7 +81,7 @@ class SignUpForm extends Component {
         credentials: 'same-origin',
         body: JSON.stringify({
           // insert submit new renter data
-          name: this.state.firstName+' '+this.state.lastName,
+          name: this.state.firstName + ' ' + this.state.lastName,
           email: this.state.email,
           password: this.state.password,
           paypal: this.state.paypal,
@@ -217,7 +217,7 @@ class SignUpForm extends Component {
             </Grid>
             <Grid item xs={5}>
               <TextField
-              fullWidth
+                fullWidth
                 id="paypal"
                 label="Paypal email"
                 value={this.state.paypaylId}
