@@ -48,7 +48,7 @@ class SignUpForm extends Component {
       password: '',
       passwordConfirm: '',
       paypal: '',
-      phone: '(   )    -    ',
+      phone: '',
       address: '',
       isRetnerCreated: false,
     };
@@ -59,9 +59,15 @@ class SignUpForm extends Component {
       [name]: e.target.value
     });
   }
+
   _phoneChange = (e) => {
-    //tests for number before changing form data
-    this.setState({ phone: e.target.value });
+  //tests for number before changing form data
+    const re = /^[0-9\b]+$/;
+    const numOfDigits = e.target.value.length;
+    const phoneCharsMax = 11;
+    if (e.target.value === '' || (re.test(e.target.value) && numOfDigits < phoneCharsMax)) {
+      this.setState({ phone: e.target.value});
+    }
   };
 
   _hanldleSubmit = () => {
