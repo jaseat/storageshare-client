@@ -41,9 +41,9 @@ class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      completed: 50,
       openDialog: false,
       name: '',
+      lastName: '',
       email: '',
       password: '',
       passwordConfirm: '',
@@ -81,7 +81,7 @@ class SignUpForm extends Component {
         credentials: 'same-origin',
         body: JSON.stringify({
           // insert submit new renter data
-          name: this.state.name,
+          name: this.state.firstName+' '+this.state.lastName,
           email: this.state.email,
           password: this.state.password,
           paypal: this.state.paypal,
@@ -114,14 +114,24 @@ class SignUpForm extends Component {
             <Grid item xs={1}>
               <AccountBox />
             </Grid>
-            <Grid item xs={11}>
+            <Grid item xs={5}>
               <TextField
                 fullWidth
                 required={true}
                 id="nameId"
-                label="Full name"
-                value={this.state.name}
-                onChange={this._handleChange("name")}
+                label="First Name"
+                value={this.state.firstName}
+                onChange={this._handleChange("firstName")}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                required={true}
+                id="nameId"
+                label="Last name"
+                value={this.state.lastName}
+                onChange={this._handleChange("lastName")}
               />
             </Grid>
           </Grid>

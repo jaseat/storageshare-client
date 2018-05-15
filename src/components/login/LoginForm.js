@@ -67,6 +67,7 @@ class LoginForm extends Component {
         />
         <TextField
           fullWidth
+          type = 'password'
           margin='normal'
           id="password"
           label="Password"
