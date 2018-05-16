@@ -21,6 +21,7 @@ class NewBoxForm extends Component {
       items: [],
       choosenSizeId: 1,
       weight: 0,
+      description: 'Junk',
       fragile: 'false',
       isBoxCreated: false
     }
@@ -49,6 +50,9 @@ class NewBoxForm extends Component {
   _setWeight = (e) => {
     this.setState({ weight: e.target.value });
   }
+  _setDescription = (e) => {
+    this.setState({ description: e.target.value });
+  }
   _setFragile = (e) => {
     this.setState({ fragile: e.target.value });
   }
@@ -60,9 +64,11 @@ class NewBoxForm extends Component {
       },
       credentials: 'same-origin',
       body: JSON.stringify({
-        sizeId: this.state.choosenSizeId,
+        SizeId: this.state.choosenSizeId,
         userId: this.props.userId,
         weight: this.state.weight,
+        description: this.state.description,
+        status: 'created',
         fragile: this.state.fragile === 'true' ? true : false
       })
     })
@@ -101,6 +107,18 @@ class NewBoxForm extends Component {
               startAdornment: <InputAdornment position="start">Lb.</InputAdornment>
             }}
             onChange={this._setWeight}
+          />
+        </FormGroup>
+        <br /><br />
+        <FormGroup>
+          <FormLabel component="legend">Description</FormLabel>
+          <TextField
+            margin='normal'
+            required={true}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">Kitchen Stuff</InputAdornment>
+            }}
+            onChange={this._setDescription}
           />
         </FormGroup>
         <br /><br />
