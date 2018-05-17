@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { Navbar, Dash, Items, NewBoxForm, Messages } from '../../containers/Renter'
-import Grid from 'material-ui/Grid'
-
+import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
+import {
+  Navbar,
+  Dash,
+  Items,
+  NewBoxForm,
+  Messages
+} from "../../containers/Renter";
+import Grid from "material-ui/Grid";
 
 class Renter extends Component {
   render() {
@@ -13,25 +18,33 @@ class Renter extends Component {
           <Navbar match={match} />
         </Grid>
         <Grid item sm={8}>
-          <Grid container direction='row' justify='center' alignItems='center'>
+          <Grid container direction="row" justify="center" alignItems="center">
             <Switch>
               <Route exact path={`/r/${match.params.user}/`} component={Dash} />
-              <Route exact path={`/r/${match.params.user}/items`} render={
-                props => (
+              <Route
+                exact
+                path={`/r/${match.params.user}/items`}
+                render={props => (
                   <Items {...props} userId={match.params.user} />
-                )
-              } />
-              <Route exact path={`/r/${match.params.user}/messages`} render={
-                props => (
+                )}
+              />
+              <Route
+                exact
+                path={`/r/${match.params.user}/messages`}
+                render={props => (
                   <Messages {...props} userId={match.params.user} />
-                )
-              } />
-              <Route exact path={`/r/${match.params.user}/rent`} component={NewBoxForm} />
+                )}
+              />
+              <Route
+                exact
+                path={`/r/${match.params.user}/rent`}
+                component={NewBoxForm}
+              />
             </Switch>
           </Grid>
         </Grid>
       </Grid>
-    )
+    );
   }
 }
 
