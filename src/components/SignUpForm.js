@@ -5,9 +5,7 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import MaskedInput from 'react-text-mask';
-import Input, { InputLabel } from 'material-ui/Input';
-import {FormControl} from 'material-ui/Form'
-import Dialog, {DialogActions,DialogContent,DialogTitle} from 'material-ui/Dialog';
+import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
 import { Typography } from 'material-ui';
 import { AccountBox, Email, Lock, Home, Phone, AccountBalanceWallet } from '@material-ui/icons';
 import Grid from 'material-ui/Grid'
@@ -23,7 +21,6 @@ function TextMaskCustom(props) {
       ref={inputRef}
       mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
       placeholderChar={'\u2000'}
-      // showMask
     />
   );
 }
@@ -38,14 +35,14 @@ class SignUpForm extends Component {
     super(props);
     this.state = {
       formData: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      passwordConfirm: '',
-      paypal: '',
-      phone: '',
-      address: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        paypal: '',
+        phone: '',
+        address: '',
       },
       openDialog: false,
       isRetnerCreated: false,
@@ -54,18 +51,18 @@ class SignUpForm extends Component {
   }
   //input field watchers
   _handleChange = name => e => {
-    const formDataNew = Object.assign({}, this.state.formData, {[name]:e.target.value});
+    const formDataNew = Object.assign({}, this.state.formData, { [name]: e.target.value });
     const check = this._checkIfAllFields();
 
-    if(check){
-      this.setState({formData: formDataNew, isSubmitDisabled: false})
-    }else{
-      this.setState({formData: formDataNew});
+    if (check) {
+      this.setState({ formData: formDataNew, isSubmitDisabled: false })
+    } else {
+      this.setState({ formData: formDataNew });
     }
   }
-  _checkIfAllFields=()=>{
-    for(var key in this.state.formData){
-      if(!this.state.formData[key]){
+  _checkIfAllFields = () => {
+    for (var key in this.state.formData) {
+      if (!this.state.formData[key]) {
         return false;
       }
     }
@@ -113,7 +110,7 @@ class SignUpForm extends Component {
         <DialogContent>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <AccountBox color="primary"/>
+              <AccountBox color="primary" />
             </Grid>
             <Grid item xs={5}>
               <TextField
@@ -138,7 +135,7 @@ class SignUpForm extends Component {
           </Grid>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <Email color="primary"/>
+              <Email color="primary" />
             </Grid>
             <Grid item xs={11}>
               <TextField
@@ -153,7 +150,7 @@ class SignUpForm extends Component {
           </Grid>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <Lock color="primary"/>
+              <Lock color="primary" />
             </Grid>
             <Grid item xs={5}>
               <TextField
@@ -185,7 +182,7 @@ class SignUpForm extends Component {
           <br />
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <Home color="primary"/>
+              <Home color="primary" />
             </Grid>
             <Grid item xs={11}>
               <TextField
@@ -200,24 +197,23 @@ class SignUpForm extends Component {
           </Grid>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <Phone color="primary"/>
+              <Phone color="primary" />
             </Grid>
             <Grid item xs={5}>
-            <FormControl>
-            <InputLabel htmlFor="phoneId">Phone</InputLabel>
-              <Input
+              <TextField
                 fullWidth
                 required={true}
                 id="phoneId"
                 label="Phone number"
-                value={this.state.phone}
+                value={this.state.formData.phone}
                 onChange={this._handleChange('phone')}
-                inputComponent={TextMaskCustom}
+                InputProps={{
+                  inputComponent: TextMaskCustom
+                }}
               />
-              </FormControl>
             </Grid>
             <Grid item xs={1}>
-              <AccountBalanceWallet color="primary"/>
+              <AccountBalanceWallet color="primary" />
             </Grid>
             <Grid item xs={5}>
               <TextField
@@ -238,7 +234,7 @@ class SignUpForm extends Component {
             Cancel
           </Button>
           <Button
-            disabled = {this.state.isSubmitDisabled}
+            disabled={this.state.isSubmitDisabled}
             variant="raised"
             color="secondary"
             onClick={this._hanldleSubmit}
