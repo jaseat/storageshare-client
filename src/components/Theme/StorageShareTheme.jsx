@@ -1,47 +1,79 @@
-import { createMuiTheme } from 'material-ui/styles';
+import { createMuiTheme } from "material-ui/styles";
 
 const StorageShare = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: "dark",
     background: {
-      default: '#424242',
+      default: "#424242"
     },
     primary: {
-      main: '#eeeeee',
-      light: '#ffffff',
-      dark: '#bcbcbc',
-      contrastText: '#000000',
+      main: "#eeeeee",
+      light: "#ffffff",
+      dark: "#bcbcbc",
+      contrastText: "#000000"
     },
     secondary: {
-      main: '#388e3c',
-      light: '#6abf69',
-      dark: '#00600f',
-      contrastText: '#ffffff',
-    },
+      main: "#388e3c",
+      light: "#6abf69",
+      dark: "#00600f",
+      contrastText: "#ffffff"
+    }
   },
   typography: {
-    fontSize: 16,
+    fontSize: 16
   },
   overrides: {
     MuiInput: {
       underline: {
-        '&:after': {
-          backgroundColor: '#388e3c',
+        "&:after": {
+          backgroundColor: "#388e3c"
         }
-      },
+      }
     },
-    // MuiButton: {
-    //   root:{
-    //     margin: 8
-    //   }
-    // },
     MuiTypography: {
       colorTextSecondary: {
-        color: 'rgba(0, 0, 0, 0.54)',
-      },
+        color: "rgba(0, 0, 0, 0.54)"
+      }
     }
-  },
+  }
 });
 
+const StorageShareLight = createMuiTheme({
+  palette: {
+    type: "light",
+    background: {
+      default: "#424242"
+    },
+    primary: {
+      main: "#424242",
+      light: "#ffffff",
+      dark: "#bcbcbc",
+      contrastText: "#000000"
+    },
+    secondary: {
+      main: "#388e3c",
+      light: "#6abf69",
+      dark: "#00600f",
+      contrastText: "#ffffff"
+    }
+  },
+  typography: {
+    fontSize: 16
+  },
+  overrides: {
+    MuiInput: {
+      underline: {
+        "&:after": {
+          backgroundColor: "#388e3c"
+        }
+      }
+    },
+    MuiTypography: {
+      colorTextSecondary: {
+        color: "rgba(0, 0, 0, 0.54)"
+      }
+    }
+  }
+});
 
-export default StorageShare;
+export { StorageShare, StorageShareLight };

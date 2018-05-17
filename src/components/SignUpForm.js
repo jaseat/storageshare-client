@@ -8,7 +8,6 @@ import MaskedInput from 'react-text-mask';
 import Input, { InputLabel } from 'material-ui/Input';
 import {FormControl} from 'material-ui/Form'
 import Dialog, {DialogActions,DialogContent,DialogTitle} from 'material-ui/Dialog';
-import Divider from 'material-ui/Divider';
 import { Typography } from 'material-ui';
 import { AccountBox, Email, Lock, Home, Phone, AccountBalanceWallet } from '@material-ui/icons';
 import Grid from 'material-ui/Grid'
