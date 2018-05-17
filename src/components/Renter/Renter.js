@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Navbar, Dash, Items, NewBoxForm } from '../../containers/Renter'
+import { Navbar, Dash, Items, NewBoxForm, Messages } from '../../containers/Renter'
 import Grid from 'material-ui/Grid'
 
 
@@ -19,6 +19,11 @@ class Renter extends Component {
               <Route exact path={`/r/${match.params.user}/items`} render={
                 props => (
                   <Items {...props} userId={match.params.user} />
+                )
+              } />
+              <Route exact path={`/r/${match.params.user}/messages`} render={
+                props => (
+                  <Messages {...props} userId={match.params.user} />
                 )
               } />
               <Route exact path={`/r/${match.params.user}/rent`} component={NewBoxForm} />
