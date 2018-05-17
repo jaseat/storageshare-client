@@ -7,7 +7,7 @@ const updateMessagesObject = (messages, type) => {
 	};
 };
 
-export function fetchMessages(id) {
+export function fetchMessages(id /*will add param to make it work for renter/lender*/) {
 	return async (dispatch) => {
 		console.log('making a call for messages');
 		var messages = await fetch('/messages/renter/' + id, {
