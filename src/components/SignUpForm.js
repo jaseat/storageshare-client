@@ -91,7 +91,8 @@ class SignUpForm extends Component {
       })
         .then(res => res.json())
         .then((res) => {
-          this.props.login(res.newUserId);
+          console.log(res);
+          this.props.login(res.newRenterId);
           this.props.handleCloseDialog;
         })
         .catch((error) => {
