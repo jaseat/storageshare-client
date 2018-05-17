@@ -104,6 +104,9 @@ class Boxes extends Component {
     var { boxes } = this.props;
     return (
       <MuiThemeProvider theme={StorageShareLight}>
+        <Typography variant="display1" align="center" color="textSecondary">
+          My boxes
+        </Typography>
         {boxes.map((b, i) => (
           <Box
             key={i}
