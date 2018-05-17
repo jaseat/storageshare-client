@@ -11,7 +11,8 @@ export default function(state: STATE = initialState, action: ACTION) {
   switch (action.type) {
     case types.LOG_IN:
       return objectAssign({}, state, {id: action.data});
-
+    case types.GET_USER:
+      return objectAssign({}, state, {id: action.data});
     default:
       return state;
   }
