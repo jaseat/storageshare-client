@@ -4,6 +4,7 @@ import Button from 'material-ui/Button';
 import SignUpForm from '../../containers/SignUpForm'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
+import Grid from 'material-ui/Grid'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -66,28 +67,30 @@ class LoginForm extends Component {
         />
         <TextField
           fullWidth
+          margin = 'dense'
           type = 'password'
-          margin='normal'
           id="password"
           label="Password"
           value={this.state.password}
           onChange={this.handleChange('password')}
         />
+        <br/><br/>
+        <Grid container direction='row' justify='space-between'>
+        <Button
+          variant='flat'
+          onClick={this._showRegisterDialog}
+        >
+          Sign Up
+          </Button>
         <Button
           variant='raised'
-          color='primary'
+          color='secondary'
           onClick={this.handleSubmit}
           disabled={!this.state.email || !this.state.password}
         >
           Go
         </Button>
-        <Button
-          variant='raised'
-          color='primary'
-          onClick={this._showRegisterDialog}
-        >
-          Sign Up
-          </Button>
+        </Grid>
         <SignUpForm open={this.state.isSignUp} handleCloseDialog={this._hideRegisterDialog} />
       </form>
     );

@@ -28,7 +28,8 @@ class NewItems extends Component {
     items.push(
       {
         name: this.state.itemName,
-        description: this.state.itemDescription
+        description: this.state.itemDescription,
+        BoxId: this.props.boxId
       }
     );
     this.setState({ itemsArray: items, itemName: '', itemDescription: '' });
@@ -45,6 +46,23 @@ class NewItems extends Component {
     var indexOfItem = items.indexOf(e.target.datarm);
     items.splice(indexOfItem, 1);
     this.setState({ itemsArray: items });
+  }
+
+  _handleAddItems=()=>{
+    fetch('/api/newitems', {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify({items: this.state.itemsArray})
+    }).then(resp=>{
+      return resp.json();
+    }).then(data=>{
+      console.log(data)
+    }).catch(error=>{
+      console.log(error);
+    })
   }
 
   render() {
@@ -67,6 +85,7 @@ class NewItems extends Component {
           <br />
         </FormGroup>
         <Button variant='fab' color='primary' mini onClick={this._addItem}><AddIcon /></Button>
+        <Button variant= 'raised' color = 'primary' onClick={this._handleAddItems}> Done</Button>
       </div>
     )
   }

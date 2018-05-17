@@ -21,21 +21,21 @@ class App extends Component {
       <MuiThemeProvider theme={StorageShare}>
         <CssBaseline />
         <AppBar position="sticky" color="primary">
-        <Toolbar>
-          <Typography variant="button" color="inherit">
-            StorageQ
+          <Toolbar>
+            <Typography variant="button" color="inherit">
+              Sclique
           </Typography>
-          <div id = 'log-in container' style = {{position: 'absolute', right: 0}}>
-          <Button component={Link} to = '/r/1'>Admin</Button>
-          </div>
-        </Toolbar>
-      </AppBar>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/r/:user" component={Renter} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/login" component={Login} />
-      </Switch>
+            <div id='log-in container' style={{ position: 'absolute', right: 0 }}>
+              <Button component={Link} to='/r/1'>Admin</Button>
+            </div>
+          </Toolbar>
+        </AppBar>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/r/:user" component={Renter} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={Login} />
+        </Switch>
       </MuiThemeProvider>
     );
   }

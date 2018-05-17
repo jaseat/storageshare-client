@@ -23,7 +23,8 @@ class NewBoxForm extends Component {
       weight: 0,
       description: 'Junk',
       fragile: 'false',
-      isBoxCreated: false
+      isBoxCreated: false,
+      boxId: null
     }
   }
   componentWillMount() {
@@ -65,7 +66,6 @@ class NewBoxForm extends Component {
       credentials: 'same-origin',
       body: JSON.stringify({
         SizeId: this.state.choosenSizeId,
-        userId: this.props.userId,
         weight: this.state.weight,
         description: this.state.description,
         status: 'created',
@@ -74,7 +74,7 @@ class NewBoxForm extends Component {
     })
       .then(resp => resp.json())
       .then(resp => {
-        this.setState({isBoxCreated: true});
+        this.setState({isBoxCreated: true, boxId: resp.newBoxId});
         console.log(resp);
       })
       .catch(error => {
@@ -132,7 +132,7 @@ class NewBoxForm extends Component {
           <FormControlLabel value='false' control={<Radio color="primary" />} label="No" />
         </RadioGroup>
         <Button variant='raised' color='primary' onClick={this._hanldleSubmit}>Create</Button>
-        {this.state.isBoxCreated ? <NewItem /> : null}
+        {this.state.isBoxCreated ? <NewItem boxId = {this.state.boxId}/> : null}
       </FormControl>
     );
   }
