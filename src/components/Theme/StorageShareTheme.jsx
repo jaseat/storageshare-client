@@ -2,33 +2,44 @@ import { createMuiTheme } from 'material-ui/styles';
 
 const StorageShare = createMuiTheme({
   palette: {
-    type: 'light',
+    type: 'dark',
     background: {
-      default: '#f4f4eb',
+      default: '#424242',
     },
     primary: {
-      main: '#2196F3',
+      main: '#eeeeee',
+      light: '#ffffff',
+      dark: '#bcbcbc',
+      contrastText: '#000000',
     },
     secondary: {
-      main: '#D32F2F',
+      main: '#388e3c',
+      light: '#6abf69',
+      dark: '#00600f',
+      contrastText: '#ffffff',
     },
   },
   typography: {
-    fontSize: 16
+    fontSize: 16,
   },
   overrides: {
     MuiInput: {
       underline: {
         '&:after': {
-          backgroundColor: '#2196F3',
+          backgroundColor: '#388e3c',
         }
       },
     },
-    MuiDialog: {
-      paper: {
-        backgroundColor: '#fff',
-      }
-    },
+    // MuiButton: {
+    //   root:{
+    //     margin: 8
+    //   }
+    // },
+    MuiTypography: {
+      colorTextSecondary: {
+        color: 'rgba(0, 0, 0, 0.54)',
+      },
+    }
   },
 });
 

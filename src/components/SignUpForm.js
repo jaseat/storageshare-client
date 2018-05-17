@@ -6,11 +6,8 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import MaskedInput from 'react-text-mask';
 import Input, { InputLabel } from 'material-ui/Input';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog';
+import {FormControl} from 'material-ui/Form'
+import Dialog, {DialogActions,DialogContent,DialogTitle} from 'material-ui/Dialog';
 import Divider from 'material-ui/Divider';
 import { Typography } from 'material-ui';
 import { AccountBox, Email, Lock, Home, Phone, AccountBalanceWallet } from '@material-ui/icons';
@@ -27,7 +24,7 @@ function TextMaskCustom(props) {
       ref={inputRef}
       mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
       placeholderChar={'\u2000'}
-      showMask
+      // showMask
     />
   );
 }
@@ -41,8 +38,8 @@ class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openDialog: false,
-      name: '',
+      formData: {
+      firstName: '',
       lastName: '',
       email: '',
       password: '',
@@ -50,25 +47,31 @@ class SignUpForm extends Component {
       paypal: '',
       phone: '',
       address: '',
+      },
+      openDialog: false,
       isRetnerCreated: false,
+      isSubmitDisabled: true,
     };
   }
   //input field watchers
   _handleChange = name => e => {
-    this.setState({
-      [name]: e.target.value
-    });
-  }
+    const formDataNew = Object.assign({}, this.state.formData, {[name]:e.target.value});
+    const check = this._checkIfAllFields();
 
-  _phoneChange = (e) => {
-    //tests for number before changing form data
-    const re = /^[0-9\b]+$/;
-    const numOfDigits = e.target.value.length;
-    const phoneCharsMax = 11;
-    if (e.target.value === '' || (re.test(e.target.value) && numOfDigits < phoneCharsMax)) {
-      this.setState({ phone: e.target.value });
+    if(check){
+      this.setState({formData: formDataNew, isSubmitDisabled: false})
+    }else{
+      this.setState({formData: formDataNew});
     }
-  };
+  }
+  _checkIfAllFields=()=>{
+    for(var key in this.state.formData){
+      if(!this.state.formData[key]){
+        return false;
+      }
+    }
+    return true;
+  }
 
   _hanldleSubmit = (e) => {
     e.preventDefault();
@@ -81,18 +84,17 @@ class SignUpForm extends Component {
         credentials: 'same-origin',
         body: JSON.stringify({
           // insert submit new renter data
-          name: this.state.firstName + ' ' + this.state.lastName,
-          email: this.state.email,
-          password: this.state.password,
-          paypal: this.state.paypal,
-          phone: this.state.phone,
-          address: this.state.address,
+          name: this.state.formData.firstName + ' ' + this.state.formData.lastName,
+          email: this.state.formData.email,
+          password: this.state.formData.password,
+          paypal: this.state.formData.paypal,
+          phone: this.state.formData.phone,
+          address: this.state.formData.address,
         }),
       })
         .then(res => res.json())
         .then((res) => {
-          this.props.login(res.newUserId);
-          this.props.handleCloseDialog;
+          this.props.login(res.newRenterId);
         })
         .catch((error) => {
           console.log(error);
@@ -112,7 +114,7 @@ class SignUpForm extends Component {
         <DialogContent>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <AccountBox />
+              <AccountBox color="primary"/>
             </Grid>
             <Grid item xs={5}>
               <TextField
@@ -120,7 +122,7 @@ class SignUpForm extends Component {
                 required={true}
                 id="nameId"
                 label="First Name"
-                value={this.state.firstName}
+                value={this.state.formData.firstName}
                 onChange={this._handleChange("firstName")}
               />
             </Grid>
@@ -128,7 +130,7 @@ class SignUpForm extends Component {
               <TextField
                 fullWidth
                 required={true}
-                id="nameId"
+                id="lastNameId"
                 label="Last name"
                 value={this.state.lastName}
                 onChange={this._handleChange("lastName")}
@@ -137,7 +139,7 @@ class SignUpForm extends Component {
           </Grid>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <Email />
+              <Email color="primary"/>
             </Grid>
             <Grid item xs={11}>
               <TextField
@@ -152,7 +154,7 @@ class SignUpForm extends Component {
           </Grid>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <Lock />
+              <Lock color="primary"/>
             </Grid>
             <Grid item xs={5}>
               <TextField
@@ -184,7 +186,7 @@ class SignUpForm extends Component {
           <br />
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <Home />
+              <Home color="primary"/>
             </Grid>
             <Grid item xs={11}>
               <TextField
@@ -199,21 +201,24 @@ class SignUpForm extends Component {
           </Grid>
           <Grid container spacing={8} alignItems="flex-end">
             <Grid item xs={1}>
-              <Phone />
+              <Phone color="primary"/>
             </Grid>
             <Grid item xs={5}>
-              <TextField
+            <FormControl>
+            <InputLabel htmlFor="phoneId">Phone</InputLabel>
+              <Input
                 fullWidth
                 required={true}
                 id="phoneId"
                 label="Phone number"
                 value={this.state.phone}
-                onChange={this._phoneChange}
+                onChange={this._handleChange('phone')}
                 inputComponent={TextMaskCustom}
               />
+              </FormControl>
             </Grid>
             <Grid item xs={1}>
-              <AccountBalanceWallet />
+              <AccountBalanceWallet color="primary"/>
             </Grid>
             <Grid item xs={5}>
               <TextField
@@ -228,15 +233,15 @@ class SignUpForm extends Component {
         </DialogContent>
         <DialogActions>
           <Button
-            variant='raised'
-            color='secondary'
+            variant='flat'
             onClick={this.props.handleCloseDialog}
           >
             Cancel
           </Button>
           <Button
+            disabled = {this.state.isSubmitDisabled}
             variant="raised"
-            color="primary"
+            color="secondary"
             onClick={this._hanldleSubmit}
           >
             Submit

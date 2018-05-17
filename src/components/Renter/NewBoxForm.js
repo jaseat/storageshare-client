@@ -66,7 +66,6 @@ class NewBoxForm extends Component {
       credentials: 'same-origin',
       body: JSON.stringify({
         SizeId: this.state.choosenSizeId,
-        userId: 1,//this.props.userId,
         weight: this.state.weight,
         description: this.state.description,
         status: 'created',
