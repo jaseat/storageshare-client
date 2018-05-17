@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import SignUpForm from '../../containers/SignUpForm'
-import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Grid from 'material-ui/Grid'
 
