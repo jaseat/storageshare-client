@@ -3,18 +3,13 @@ import React, { Component } from "react";
 //-- material-ui components
 import Button from "material-ui/Button";
 import TextField from "material-ui/TextField";
-import { InputAdornment } from "material-ui/Input";
 import { MenuItem } from "material-ui/Menu";
 import Radio, { RadioGroup } from "material-ui/Radio";
 import { FormControlLabel } from "material-ui/Form";
-import Paper from "material-ui/Paper";
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import { StorageShareLight } from "../Theme/StorageShareTheme";
 import Divider from "material-ui/Divider";
-//--custom
-import NewItem from "./NewItem";
+
 const sizesUrl = "/api/sizes";
 const newBoxUrl = "/api/box";
 

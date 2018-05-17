@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import Grid from "material-ui/Grid";
+import Divider from "material-ui/Divider";
+import Typography from "material-ui/Typography";
 import Chip from "material-ui/Chip"; //-- convinient to display added items
 import TextField from "material-ui/TextField";
-import { InputAdornment } from "material-ui/Input";
-import { FormGroup } from "material-ui/Form";
 import { Button } from "material-ui";
-import AddIcon from "@material-ui/icons/Add";
 
 class NewItems extends Component {
   constructor(props) {
@@ -20,10 +20,10 @@ class NewItems extends Component {
     this.state.itemsArray.map(item => {
       chips.push(
         <Chip
+          style={{ marginLeft: 10 }}
           key={item.name}
           label={item.name}
-          onDelete={this._deleteItem}
-          datarm={item}
+          onDelete={this._deleteItem(item)}
         />
       );
     });
@@ -46,11 +46,13 @@ class NewItems extends Component {
     });
   };
 
-  _deleteItem = e => {
-    var items = this.state.itemsArray;
-    var indexOfItem = items.indexOf(e.target.datarm);
-    items.splice(indexOfItem, 1);
-    this.setState({ itemsArray: items });
+  _deleteItem = item => {
+    return () => {
+      var items = this.state.itemsArray;
+      var indexOfItem = items.indexOf(item);
+      items.splice(indexOfItem, 1);
+      this.setState({ itemsArray: items });
+    }
   };
 
   _handleAddItems = () => {
@@ -77,34 +79,58 @@ class NewItems extends Component {
   render() {
     return (
       <div>
-        {this._renderChips()}
-        <FormGroup>
-          <TextField
-            onChange={this._handleTextFieldInput("itemName")}
-            value={this.state.itemName}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">Name</InputAdornment>
-              )
-            }}
-          />
-          <TextField
-            onChange={this._handleTextFieldInput("itemDescription")}
-            value={this.state.itemDescription}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">Description</InputAdornment>
-              )
-            }}
-          />
-          <br />
-        </FormGroup>
-        <Button variant="fab" color="primary" mini onClick={this._addItem}>
-          <AddIcon />
-        </Button>
-        <Button variant="raised" color="primary" onClick={this._handleAddItems}>
-          Done
-        </Button>
+        <Typography variant="title">
+          Current items: {this._renderChips()}
+        </Typography>
+
+        <Grid container direction="row" justify="center" alignItems="flex-end">
+          <Grid item xs={6}>
+            <Typography variant="title">Item Name</Typography>
+            <Divider />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              onChange={this._handleTextFieldInput("itemName")}
+              value={this.state.itemName}
+              fullWidth
+              label="etc: Cup"
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container direction="row" justify="center" alignItems="flex-end">
+          <Grid item xs={6}>
+            <Typography variant="title">Description</Typography>
+            <Divider />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              label="etc. my favorite red mug"
+              onChange={this._handleTextFieldInput("itemDescription")}
+              value={this.state.itemDescription}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid
+          container
+          direction="row"
+          justify="flex-end"
+          style={{ marginTop: 20 }}
+        >
+          <Button variant="raised" color="primary" onClick={this._addItem}>
+            Add
+          </Button>
+          <Button
+            style={{ marginLeft: 20 }}
+            variant="raised"
+            color="secondary"
+            onClick={this._handleAddItems}
+          >
+            Done
+          </Button>
+        </Grid>
       </div>
     );
   }

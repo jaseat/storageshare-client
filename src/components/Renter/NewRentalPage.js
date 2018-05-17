@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 //material-ui
 import Typography from "material-ui/Typography";
-import Grid from "material-ui/Grid";
-import { LinearProgress } from "material-ui/Progress";
-import Button from "material-ui/Button";
 //animation
 import SwipeableViews from "react-swipeable-views";
 // import { Stepper, Step, StepLabel} from 'material-ui/Stepper - for future
