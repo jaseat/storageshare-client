@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import {
-  Navbar,
-  Dash,
-  Items,
-  NewBoxForm,
-  Messages
-} from "../../containers/Renter";
+import { Navbar, Dash, Items, Messages } from "../../containers/Renter";
+import NewRentalPage from "./NewRentalPage";
 import Grid from "material-ui/Grid";
 
 class Renter extends Component {
@@ -38,7 +33,7 @@ class Renter extends Component {
               <Route
                 exact
                 path={`/r/${match.params.user}/rent`}
-                component={NewBoxForm}
+                component={NewRentalPage}
               />
             </Switch>
           </Grid>
