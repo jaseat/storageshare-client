@@ -71,22 +71,30 @@ class Box extends Component {
   render() {
     var { description } = this.props;
     return (
-      <div>
-        <MuiThemeProvider theme={StorageShareLight}>
-          <Paper style={styles.boxes}>
-            <div onClick={this.handleClick} style={styles.icon}>
-              {this.state.open ? <ExpandMore /> : <ChevronRight />}
-            </div>
-            <div style={{ justifySelf: "center", alignSelf: "center" }}>
-              <Typography variant="title">{description}</Typography>
-            </div>
-            <Button variant="raised" style={{ gridColumnStart: "4" }}>
-              Recall
-            </Button>
-            {this._renderItems()}
-          </Paper>
-        </MuiThemeProvider>
-      </div>
+      <Slide
+        direction="up"
+        in={true}
+        style={{ transitionDelay: this.props.delay }}
+        mountOnEnter
+        unmountOnExit
+      >
+        <Paper style={styles.boxes}>
+          <div onClick={this.handleClick} style={styles.icon}>
+            {this.state.open ? <ExpandMore /> : <ChevronRight />}
+          </div>
+          <div style={{ justifySelf: "center", alignSelf: "center" }}>
+            <Typography variant="title">{description}</Typography>
+          </div>
+          <Button
+            variant="raised"
+            color="secondary"
+            style={{ gridColumnStart: "4" }}
+          >
+            Recall
+          </Button>
+          {this._renderItems()}
+        </Paper>
+      </Slide>
     );
   }
 }
@@ -95,11 +103,16 @@ class Boxes extends Component {
   render() {
     var { boxes } = this.props;
     return (
-      <div>
+      <MuiThemeProvider theme={StorageShareLight}>
         {boxes.map((b, i) => (
-          <Box key={i} description={b.description} items={b.Items} />
+          <Box
+            key={i}
+            description={b.description}
+            items={b.Items}
+            delay={i * 200}
+          />
         ))}
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
