@@ -13,8 +13,6 @@ import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Button from 'material-ui/Button'
 
-const signupLink = <Route path="/signup" component={SignUp} />
-
 class App extends Component {
   render() {
     return (

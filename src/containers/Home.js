@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
-import { typography } from 'material-ui/styles';
-import Tabs, { Tab } from 'material-ui/Tabs';
 import LoginForm from './login/Login'
 import { Parallax } from 'react-parallax'
 

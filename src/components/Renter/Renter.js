@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Navbar, Dash, Items, NewBoxForm } from '../../containers/Renter'
+import { Navbar, Dash, Items } from '../../containers/Renter'
+import NewRentalPage from '../../components/Renter/NewRentalPage'
 import Grid from 'material-ui/Grid'
 
 
@@ -21,7 +22,7 @@ class Renter extends Component {
                   <Items {...props} userId={match.params.user} />
                 )
               } />
-              <Route exact path={`/r/${match.params.user}/rent`} component={NewBoxForm} />
+              <Route exact path={`/r/${match.params.user}/rent`} component={NewRentalPage} />
             </Switch>
           </Grid>
         </Grid>
