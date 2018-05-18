@@ -14,3 +14,28 @@ export function login(id) {
     dispatch(updateUserObject(id, types.LOG_IN));
   };
 }
+
+export function getUser() {
+  return async dispatch => {
+    var res = await fetch('/api/userid', {
+      credentials: 'same-origin'
+    })
+    if(res.status === 200){
+      var {userid} = await res.json();
+      history.push('/r/' + userid);
+      dispatch(updateUserObject(userid, types.GET_USER));
+    }
+  }
+}
+
+export function logOut() {
+  return async dispatch => {
+    var res = await fetch('/logout', {
+      credentials: 'same-origin'
+    })
+    if(res.status === 200){
+      dispatch(updateUserObject(null, types.LOG_OUT));
+      history.push('/');
+    }
+  }
+}
