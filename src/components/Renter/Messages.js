@@ -5,6 +5,12 @@ import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
 import List, { ListItem } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
+import Slide from 'material-ui/transitions/Slide';
+import Typography from 'material-ui/Typography';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { StorageShareLight } from '../Theme/StorageShareTheme';
+import Divider from 'material-ui/Divider';
+import Grid from 'material-ui/Grid';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 
@@ -15,26 +21,54 @@ class Message extends Component {
 			open: false,
 		};
 	}
-	_renderItems = () => {
+	_renderMessage = () => {
 		var lendersResponse = 'Waiting for response a response from lender';
-		if (this.props.message.isAccepted && this.props.message.readByRenter)
+		var buttonText = 'Waiting';
+		var displayBtn = false;
+		if (this.props.message.isAccepted && this.props.message.readByRenter) {
 			lendersResponse = `Your package is located at: ${
 				this.props.message.Location.address
 			}`;
-		else if (this.props.message.isAccepted && !this.props.message.readByRenter)
+			buttonText = 'Recall Box';
+			displayBtn = true;
+		} else if (
+			this.props.message.isAccepted &&
+			!this.props.message.readByRenter
+		) {
 			lendersResponse = `Congratulation! Property owner of: ${
 				this.props.message.Location.address
 			} has accepted your offer`;
-		else if (this.props.message.isAccepted === false)
+			displayBtn = true;
+			buttonText = 'Confirm';
+		} else if (this.props.message.isAccepted === false) {
 			lendersResponse = `Sorry! Property owner of: ${
 				this.props.message.Location.address
 			} has declined your offer`;
+			displayBtn = true;
+			buttonText = 'Search other storage';
+		}
 
 		return (
 			<Collapse in={this.state.open} style={styles.collapse}>
-				<p>{lendersResponse}</p>
+				<Grid>
+					<p>{lendersResponse}</p>
+					{displayBtn && (
+						<Button
+							variant="raised"
+							color="secondary"
+							style={{ gridColumnStart: '4' }}
+							onClick={this.handleBtnClick}
+						>
+							{buttonText}
+						</Button>
+					)}
+				</Grid>
 			</Collapse>
 		);
+	};
+
+	handleBtnClick = (event) => {
+		console.log(event.target);
 	};
 
 	handleClick = () => {
@@ -44,7 +78,13 @@ class Message extends Component {
 	render() {
 		var { description } = this.props;
 		return (
-			<div>
+			<Slide
+				direction="up"
+				in={true}
+				style={{ transitionDelay: this.props.delay }}
+				mountOnEnter
+				unmountOnExit
+			>
 				<Paper style={styles.boxes}>
 					<div onClick={this.handleClick} style={styles.icon}>
 						{this.state.open ? <ExpandMore /> : <ChevronRight />}
@@ -53,14 +93,26 @@ class Message extends Component {
 						Box - {description}
 					</div>
 					{!this.props.message.readByRenter ? (
-						<Button style={{ gridColumnStart: '4' }}>New</Button>
+						<Button
+							variant="raised"
+							color="secondary"
+							style={{ gridColumnStart: '4' }}
+						>
+							New
+						</Button>
 					) : (
-						<Button style={{ gridColumnStart: '4' }}>Read</Button>
+						<Button
+							variant="raised"
+							color="secondary"
+							style={{ gridColumnStart: '4' }}
+						>
+							Read
+						</Button>
 					)}
 
-					{this._renderItems()}
+					{this._renderMessage()}
 				</Paper>
-			</div>
+			</Slide>
 		);
 	}
 }
@@ -73,12 +125,19 @@ class Messages extends Component {
 	render() {
 		var { messages } = this.props;
 		return (
-			<div style={{ width: '100%' }}>
-				{messages &&
-					messages.map((m, i) => (
-						<Message key={i} description={m.Box.description} message={m} />
-					))}
-			</div>
+			<MuiThemeProvider theme={StorageShareLight}>
+				<div style={{ width: '100%' }}>
+					{messages &&
+						messages.map((m, i) => (
+							<Message
+								key={i}
+								description={m.Box.description}
+								message={m}
+								delay={i * 200}
+							/>
+						))}
+				</div>
+			</MuiThemeProvider>
 		);
 	}
 }
