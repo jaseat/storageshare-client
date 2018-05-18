@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import Home from "./containers/Home";
 import Renter from "./containers/Renter";
+import Lender from "./containers/Lender";
 import SignUp from "./containers/SignUpForm";
 import Login from "./containers/login/Login";
 import { StorageShare } from "./components/Theme/StorageShareTheme";
@@ -51,6 +52,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/r/:user" component={Renter} />
+          <Route path="/l/:user" component={Lender} />
           <Route path="/signup" component={SignUp} />
           <Route path="/login" component={Login} />
         </Switch>
