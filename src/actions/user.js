@@ -27,3 +27,15 @@ export function getUser() {
     }
   }
 }
+
+export function logOut() {
+  return async dispatch => {
+    var res = await fetch('/logout', {
+      credentials: 'same-origin'
+    })
+    if(res.status === 200){
+      dispatch(updateUserObject(null, types.LOG_OUT));
+      history.push('/');
+    }
+  }
+}

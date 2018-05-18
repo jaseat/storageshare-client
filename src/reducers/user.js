@@ -13,6 +13,8 @@ export default function(state: STATE = initialState, action: ACTION) {
       return objectAssign({}, state, {id: action.data});
     case types.GET_USER:
       return objectAssign({}, state, {id: action.data});
+    case types.LOG_OUT:
+      return objectAssign({}, state, {id: action.data});
     default:
       return state;
   }
