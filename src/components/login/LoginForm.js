@@ -109,7 +109,7 @@ class LoginForm extends Component {
               checked={this.state.isLender}
               onChange={this.ischecked}
               value="checkedB"
-              color="primary"
+              color="secondary"
             />
           }
           label="I'm Lender"
