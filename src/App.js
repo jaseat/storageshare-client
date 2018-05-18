@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import Home from "./containers/Home";
 import Renter from "./containers/Renter";
+import Lender from "./containers/Lender";
 import SignUp from "./containers/SignUpForm";
 import Login from "./containers/login/Login";
 import { StorageShare } from "./components/Theme/StorageShareTheme";
